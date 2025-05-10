@@ -18,6 +18,5 @@ public class GameState : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Persist across scenes
     }
 }

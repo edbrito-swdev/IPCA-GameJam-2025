@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     public LayerMask collisionLayers;
-
+    public float lookahead = 0.5f;
     private Rigidbody rb;
     private Vector3 movement;
 
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         //     return;
         
         Vector3 moveDelta = movement * speed * Time.fixedDeltaTime;
-        Debug.DrawRay(rb.position, moveDelta, Color.red);
+        Debug.DrawRay(Vector3.right, moveDelta, Color.red);
         
         // Cast forward to check for collision before moving
         if (!IsBlocked(moveDelta))
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     }
     bool IsBlocked(Vector3 moveDelta)
     {
-        float castDistance = moveDelta.magnitude + 0.01f;
+        float castDistance = moveDelta.magnitude + lookahead;
         Vector3 origin = rb.position;
         Vector3 direction = moveDelta.normalized;
 
