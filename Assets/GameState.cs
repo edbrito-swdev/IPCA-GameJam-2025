@@ -6,6 +6,7 @@ public class GameState : MonoBehaviour
 
     // Example variables you might want to track
     public bool thrownHead = false;
+    public float direction = 1.0f;
 
     private void Awake()
     {

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropObstacle : MonoBehaviour
+public class FinishLevel : MonoBehaviour
 {
-    public GameObject obstacle;
+    public GameObject finish;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +20,11 @@ public class DropObstacle : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Head"))
+        if (other.gameObject.CompareTag("Head") || other.gameObject.CompareTag("Torso") ||
+            other.gameObject.CompareTag("Legs"))
         {
-            Destroy(obstacle);
-            Destroy(gameObject);
+            if (!GameState.Instance.thrownHead)
+                finish.SetActive(true);
         }
     }
 }

@@ -15,24 +15,35 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GameState.Instance.thrownHead && CompareTag("Head"))
+        DropHead dh = gameObject.GetComponent<DropHead>();
+        if ((dh != null) && !dh.originalHead)
             return;
-        
+    
         movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.D))
+        {
             movement += Vector3.right;
+            GameState.Instance.direction = 1;
+        }
+
 
         if (Input.GetKey(KeyCode.A))
+        {
             movement += Vector3.left;
+            GameState.Instance.direction = -1;
+        }
 
         movement = movement.normalized;
     }
 
     void FixedUpdate()
     {
-        if (GameState.Instance.thrownHead && CompareTag("Head"))
+        DropHead dh = gameObject.GetComponent<DropHead>();
+        if ((dh != null) && !dh.originalHead)
             return;
+        // if (GameState.Instance.thrownHead && CompareTag("Head"))
+        //     return;
         
         Vector3 moveDelta = movement * speed * Time.fixedDeltaTime;
         Debug.DrawRay(rb.position, moveDelta, Color.red);

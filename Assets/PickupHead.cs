@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropObstacle : MonoBehaviour
+public class PickupHead : MonoBehaviour
 {
-    public GameObject obstacle;
+    public GameObject originalHeadRenderer;
+    public BoxCollider originalHeadCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +23,10 @@ public class DropObstacle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Head"))
         {
-            Destroy(obstacle);
-            Destroy(gameObject);
+            originalHeadRenderer.SetActive(true);
+            originalHeadCollider.enabled = true;
+            GameState.Instance.thrownHead = false;
+            Destroy(other.gameObject);
         }
     }
 }
